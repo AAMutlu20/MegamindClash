@@ -11,7 +11,7 @@ bool key = 0;
 bool doorR = 0;
 enum eDirecton { STOP = 1, LEFT, RIGHT, UP, DOWN };
 eDirecton dir;
-char map[20][40] = {
+char map[20][41] = {
     "----------------------------------------",
     "|       |                      |       |",
     "|       |      _____           |       |",
