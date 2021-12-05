@@ -124,7 +124,7 @@ void KeyObtain()
     }
     if (key == 1)
     {
-        cout << " ";
+        cout << "You found a Key!";
     }
 }
 
