@@ -1,3 +1,4 @@
+//libraries
 #include <iostream>
 #include <conio.h>
 #include <cmath>
@@ -11,6 +12,8 @@ bool key = 0;
 bool doorR = 0;
 enum eDirecton { STOP = 1, LEFT, RIGHT, UP, DOWN };
 eDirecton dir;
+
+//map size
 char map[20][41] = {
     "----------------------------------------",
     "|       |                      |       |",
@@ -35,6 +38,8 @@ char map[20][41] = {
     
 };
 
+
+//setting up the coordinates for the keys and doors.
 void Setup()
 {
     gOver = false;
@@ -49,6 +54,7 @@ void Setup()
     doorY = 0;
 }
 
+//printing the map on screen
 void Map()
 {
 	for (int i = 0; i < 18; i++) 
@@ -57,12 +63,15 @@ void Map()
 	}
 }
 
+
+//keybinds for movement
 void Input()
 {
-    if (_kbhit())
+    if (_kbhit()) //clicking a character on the keyboard
     {
-        switch (_getch())
-        {
+        switch (_getch()) //obtaining the clicked character
+        {	
+	//movement		
         case 'a':
             dir = LEFT;
 
@@ -106,6 +115,7 @@ void Input()
     }
 }
 
+//getting keys
 void KeyObtain()
 {
     if (x == keyX && y == keyY)
@@ -118,10 +128,13 @@ void KeyObtain()
     }
 }
 
+
+//opening the doors
 void door()
 {
     if (x == doorX && y == doorY && key == 1)
     {
+	 //the door opens and the key dissapears
         doorR = 1;
         key = 0;
     }
@@ -132,6 +145,8 @@ void door()
     }
 }
 
+
+//ending the game
 void GameO()
 {
     if (gOver == true)
@@ -140,6 +155,8 @@ void GameO()
         cout << setw(50) << "GAME OVER";
     }
 }
+
+//setting up the game
 int main()
 {
     Setup();
