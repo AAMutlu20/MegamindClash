@@ -60,24 +60,24 @@ void Map()
     {
         for (int j = 0; j < 41; j++)
         {
-            if (map[i][j] == 'H')
+            if (map[i][j] == 'H') //character/player
             {
                 x = j;
                 y = i;
             }
-            else if (map[i][j] == 'D' && counter == 0)
+            else if (map[i][j] == 'D' && counter == 0) //door1
             {
                 doorX1 = j;
                 doorY1 = i;
                 counter++;
             }
-            else if (map[i][j] == 'D' && counter == 1)
+            else if (map[i][j] == 'D' && counter == 1) //door2
             {
                 doorX2 = j;
                 doorY2 = i;
                 counter++;
             }
-            else if (map[i][j] == 'D' && counter == 2)
+            else if (map[i][j] == 'D' && counter == 2) //door3
             {
                 doorX3 = j;
                 doorY3 = i;
@@ -99,7 +99,7 @@ void Input()
         switch (_getch()) //obtaining the clicked character
         {	
 	//movement		
-        case 'a':
+        case 'a': //move left
             if (x - 1 >= 0 && map[y][x - 1] == ' ')
             {
                 temp = map[y][x - 1];
@@ -109,7 +109,7 @@ void Input()
             }
 
             break;
-        case 'd':
+        case 'd': //move right
             if (x + 1 <= 40 && map[y][x + 1] == ' ')
             {
                 temp = map[y][x + 1];
@@ -119,7 +119,7 @@ void Input()
             }
 
             break;
-        case 'w':
+        case 'w': //move up
             if (y - 1 >= 0 && map[y - 1][x] == ' ')
             {
                 temp = map[y - 1][x];
@@ -130,7 +130,7 @@ void Input()
 
 
             break;
-        case 's':
+        case 's': //move down
             if (y + 1 <= 19 && map[y + 1][x] == ' ')
             {
                 temp = map[y + 1][x];
@@ -140,7 +140,7 @@ void Input()
             }
 
             break;
-        case 'x':
+        case 'x': //end game character
             gOver = true;
             break;
         }
@@ -150,7 +150,7 @@ void Input()
 //getting keys
 void KeyObtain()
 {
-    if (x == keyX1 && y == keyY1)
+    if (x == keyX1 && y == keyY1) //right position - obtain key
     {
         key = 1;
     }
