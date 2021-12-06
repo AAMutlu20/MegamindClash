@@ -194,6 +194,9 @@ void Input()
         case 'x': //end game
             gOver = true;
             break;
+	case 'X': //end game
+            gOver = true;
+            break;
         }
     }
 }
@@ -298,7 +301,17 @@ void GameO()
     if (gOver == true)
     {
         system("cls");
+	cout << endl;
+	cout << endl;
+	cout << endl;
+	cout << endl;
+	cout << endl;
         cout << setw(60) << "GAME OVER";
+	cout << endl;
+	cout << endl;
+	cout << endl;
+	cout << endl;
+	cout << endl;
     }
 }
 
