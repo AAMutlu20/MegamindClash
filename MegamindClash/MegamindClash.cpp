@@ -7,8 +7,15 @@
 using namespace std;
 
 bool gOver;
-int x, y, keyX, keyY, doorX, doorY;
+int x, y;
+int doorX1, doorY1;
+int doorX2, doorY2;
+int doorX3, doorY3;
+int keyX1, keyY1;
+int keyX2, keyY2;
+int keyX3, keyY3;
 char temp;
+int counter = 0;
 bool key = 0;
 bool doorR = 0;
 
@@ -18,15 +25,15 @@ char map[20][41] = {
     "----------------------------------------",
     "|       |D                     |       |",
     "|       |      _____           |       |",
-    "|_______|      |B1 |___________|       |",
-    "|              |___|___________|_______|",
-    "|                                      |",
-    "|                      _________       |",
+    "|       |      |B1 |___________|       |",
+    "|       |      |___|___________|_______|",
+    "|       |                              |",
+    "|_______|              _________       |",
     "|                      |    |D3|       |",
     "|                H     |    |__|  D    |",
-    "|----------|           |       |       |",
+    "|__________            |       |       |",
     "|          |           |_______|       |",
-    "|----------|                           |",
+    "|__________|                           |",
     "|D                                     |",
     "|                  _____________       |",
     "|       ____       |C2   |     |       |",
@@ -48,7 +55,7 @@ void Setup()
 //printing the map on screen
 void Map()
 {
-	for (int i = 0; i < 20; i++) 
+    for (int i = 0; i < 20; i++)
     {
         for (int j = 0; j < 41; j++)
         {
@@ -57,11 +64,30 @@ void Map()
                 x = j;
                 y = i;
             }
+            else if (map[i][j] == 'D' && counter == 0)
+            {
+                doorX1 = j;
+                doorY1 = i;
+                counter++;
+            }
+            else if (map[i][j] == 'D' && counter == 1)
+            {
+                doorX2 = j;
+                doorY2 = i;
+                counter++;
+            }
+            else if (map[i][j] == 'D' && counter == 2)
+            {
+                doorX3 = j;
+                doorY3 = i;
+                counter++;
+            }
+
 
             cout << map[i][j];
         }
         cout << endl;
-	}
+    }
 }
 
 
@@ -124,7 +150,7 @@ void Input()
 //getting keys
 void KeyObtain()
 {
-    if (x == keyX && y == keyY)
+    if (x == keyX1 && y == keyY1)
     {
         key = 1;
     }
@@ -138,7 +164,7 @@ void KeyObtain()
 //opening the doors
 void door()
 {
-    if (x == doorX && y == doorY && key == 1)
+    if (x == doorX1 && y == doorY1 && key == 1)
     {
 	 //the door opens and the key dissapears
         doorR = 1;
@@ -166,10 +192,10 @@ void GameO()
 int main()
 {
     Setup();
-    Map();
-    
+
     while (gOver == false)
     {
+        Map();
         Input();
         KeyObtain();
         door();
