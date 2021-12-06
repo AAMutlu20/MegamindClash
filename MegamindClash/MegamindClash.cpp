@@ -1,6 +1,8 @@
 //libraries
 #include <iostream>
 #include <conio.h>
+#include <string>
+#include <windows.h>
 #include <cmath>
 #include <iomanip>
 
@@ -17,6 +19,15 @@ int keyX3, keyY3;
 char temp;
 int counter = 0;
 int counter2 = 0;
+int KeyCollectionCounter = 0;
+int KeyCollectionCounter2 = 0;
+int KeyCollectionCounter3 = 0;
+int DoorPassCounter1 = 0;
+int DoorPassCounter2 = 0;
+int DoorPassCounter3 = 0;
+string PhysicsQ;
+string PhysicsQ2;
+string PhysicsQ3;
 int key = 0;
 int doorR = 0;
 
@@ -24,9 +35,9 @@ int doorR = 0;
 //map size
 char map[20][41] = {
     "----------------------------------------",
-    "|       |D                    K|       |",
+    "|       |D                     |       |",
     "|       |      _____           |       |",
-    "|       |      |B1 |___________|       |",
+    "|       |      |B1#|___________|       |",
     "|       |      |___|___________|_______|",
     "|       |                              |",
     "|_______|              _________       |",
@@ -37,11 +48,11 @@ char map[20][41] = {
     "|__________|                           |",
     "|D                                     |",
     "|                  _____________       |",
-    "|       ____       |C2   |     |       |",
-    "|       |A5|       |     |_____|       |",
-    "|       |  |       |     |K            |",
+    "|       ____       |C2         |       |",
+    "|       |A5|       |      _____|       |",
     "|       |  |       |     |             |",
-    "|       |  |K      |     |             |",
+    "|       |  |       |     |             |",
+    "|       |  |       |     |             |",
     "----------------------------------------",
     
 };
@@ -51,6 +62,20 @@ char map[20][41] = {
 void Setup()
 {
     gOver = false;
+    keyX1 = 30;
+    keyX2 = 26;
+    keyX3 = 12;
+    keyY1 = 1;
+    keyY2 = 16;
+    keyY3 = 18;
+    doorX1 = 10;
+    doorX2 = 33;
+    doorX3 = 2;
+    doorY1 = 1;
+    doorY2 = 8;
+    doorY3 = 12;
+
+     
 }
 
 //printing the map on screen
@@ -66,55 +91,14 @@ void Map()
                 x = j;
                 y = i;
             }
-            else if (map[i][j] == 'D' && counter == 0)
-            {
-                doorX1 = j;
-                doorY1 = i;
-                counter++;
-                break;
-            }
-            else if (map[i][j] == 'D' && counter == 1)
-            {
-                doorX2 = j;
-                doorY2 = i;
-                counter++;
-                break;
-            }
-            else if (map[i][j] == 'D' && counter == 2)
-            {
-                doorX3 = j;
-                doorY3 = i;
-                counter++;
-                break;
-            }
-            else if (map[i][j] == 'K' && counter2 == 0)
-            {
-                keyX1 = j;
-                keyY1 = i;
-                counter++;
-                break;
-            }
-            else if (map[i][j] == 'K' && counter2 == 1)
-            {
-                keyX2 = j;
-                keyY2 = i;
-                counter++;
-                break;
-            }
-            else if (map[i][j] == 'K' && counter2 == 2)
-            {
-                keyX3 = j;
-                keyY3 = i;
-                counter++;
-                break;
-            }
 
             cout << map[i][j];
         }
         cout << endl;
     }
 
-    cout << "Keys: " << key;
+    cout << "Coords: " << x << "/" << y << endl;
+    cout << "Artefact Parts: " << doorR << "/" << "3" << endl;
 }
 
 
@@ -217,47 +201,79 @@ void Input()
 //getting keys
 void KeyObtain()
 {
-    if (x == keyX1 - 1 && y == keyY1)
+    if (x == keyX1 && y == keyY1 && KeyCollectionCounter == 0)
     {
-        key++;
-        map[keyX1][keyY1] = ' ';
+        cout << "Can a fire have a shadow?\nYes/No" << endl;
+        cin >> PhysicsQ;
+
+        if (PhysicsQ == "Yes")
+        {
+            key++;
+            KeyCollectionCounter++;
+        }
+        else
+        {
+            gOver = true;
+        }
     }
-    else if (x == keyX2 + 1 && y == keyY2)
+    else if (x == keyX2 && y == keyY2 && KeyCollectionCounter2 == 0)
     {
-        key++;
-        map[keyX2][keyY2] = ' ';
+        cout << "Can light bend around corners?\nYes/No" << endl;
+        cin >> PhysicsQ2;
+
+        if (PhysicsQ2 == "Yes")
+        {
+            key++;
+            KeyCollectionCounter2++;
+        }
+        else
+        {
+            gOver = true;
+        }
     }
-    else if (x == keyX3 + 1 && y == keyY3)
+    else if (x == keyX3 && y == keyY3 && KeyCollectionCounter3 == 0)
     {
-        key++;
-        map[keyX3][keyY3] = ' ';
+        cout << "As light from a star spreads out and weakens, do gaps form between the photons?\nYes/No" << endl;
+        cin >> PhysicsQ3;
+
+        if (PhysicsQ3 == "No")
+        {
+            key++;
+            KeyCollectionCounter3++;
+        }
+        else
+        {
+            gOver = true;
+        }
     }
+
+    cout << "Keys: " << key;
 }
 
 
 //opening the doors
 void door()
 {
-    if (x == doorX1 + 1 && y == doorY1 && key >= 1)
+    if (x == doorX1 && y == doorY1 && key >= 1 && DoorPassCounter1 == 0)
     {
 	 //the door opens and the key dissapears
         doorR++;
         key--;
-        map[doorX1][doorY1] = ' ';
+        DoorPassCounter1++;
     }
-    else if (x == doorX2 - 1 && y == doorY2 && key >= 1)
+    else if (x == doorX2 && y == doorY2 && key >= 1 && DoorPassCounter2 == 0)
     {
         //the door opens and the key dissapears
         doorR++;
         key--;
-        map[doorX2][doorY2] = ' ';
+        DoorPassCounter2++;
     }
-    else if (x == doorX3 + 1 && y == doorY3 && key >= 1)
+    else if (x == doorX3 && y == doorY3 && key >= 1 && DoorPassCounter3 == 0)
     {
         //the door opens and the key dissapears
         doorR++;
         key--;
-        map[doorX3][doorY3] = ' ';
+        DoorPassCounter3++;
     }
     else if (doorR == 3)
     {
@@ -273,7 +289,7 @@ void GameO()
     if (gOver == true)
     {
         system("cls");
-        cout << setw(50) << "GAME OVER";
+        cout << setw(60) << "GAME OVER";
     }
 }
 
