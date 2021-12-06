@@ -33,23 +33,23 @@ int doorR = 0;
 
 
 //map size
-char map[20][41] = {
+char map[20][42] = {
     "----------------------------------------",
-    "|       |D                     |       |",
-    "|       |      _____           |       |",
-    "|       |      |B1#|___________|       |",
-    "|       |      |___|___________|_______|",
-    "|       |                              |",
-    "|_______|              _________       |",
-    "|                      |    |D3|       |",
-    "|                H     |    |__|  D    |",
-    "|__________            |       |       |",
-    "|          |           |_______|       |",
+    "|🗔   🗔|⛩                    |🗔   🗔|",
+    "|🗔   🗔|      _____           |🗔   🗔|",
+    "|🗔   🗔|      |B1 |___________|🗔   🗔|",
+    "|🗔   🗔|🚧 🚧|___|___________|🚪___🚪|",
+    "|🗔   🗔|                              |",
+    "|🚪___🚪|              _________       |",
+    "|                      | 🗔 |D3|       |",
+    "|                💂    |🗔   🗔|  ⛩   |",
+    "|__________            |🗔   🗔|       |",
+    "|🗔  🗔  🗔|           |🚪_____|       |",
     "|__________|                           |",
-    "|D                                     |",
+    "|⛩                                    |",
     "|                  _____________       |",
-    "|       ____       |C2         |       |",
-    "|       |A5|       |      _____|       |",
+    "|       ____       |🗔  🗔  🗔 |       |",
+    "|       |A5|       |C2 🗔 _____|       |",
     "|       |  |       |     |             |",
     "|       |  |       |     |             |",
     "|       |  |       |     |             |",
@@ -96,9 +96,9 @@ void Map()
         }
         cout << endl;
     }
-
-    cout << "Coords: " << x << "/" << y << endl;
-    cout << "Artefact Parts: " << doorR << "/" << "3" << endl;
+//Artefacts and Coords menu
+    cout << "🧭Coords: " << x << "/" << y << endl;
+    cout << "🏺Artefact Parts: " << doorR << "/" << "3" << endl;
 }
 
 
@@ -191,7 +191,7 @@ void Input()
             }
 
             break;
-        case 'x': //end game character
+        case 'x': //end game
             gOver = true;
             break;
         }
@@ -203,21 +203,25 @@ void KeyObtain()
 {
     if (x == keyX1 && y == keyY1 && KeyCollectionCounter == 0)
     {
+	    //Physic Question 1
         cout << "Can a fire have a shadow?\nYes/No" << endl;
         cin >> PhysicsQ;
 
         if (PhysicsQ == "Yes")
         {
+		//If the answer is right the player obtains 1 key.
             key++;
             KeyCollectionCounter++;
         }
         else
         {
+		//If the answer is wrong the game ends.
             gOver = true;
         }
     }
     else if (x == keyX2 && y == keyY2 && KeyCollectionCounter2 == 0)
     {
+	    //Physic Question 2
         cout << "Can light bend around corners?\nYes/No" << endl;
         cin >> PhysicsQ2;
 
@@ -233,6 +237,7 @@ void KeyObtain()
     }
     else if (x == keyX3 && y == keyY3 && KeyCollectionCounter3 == 0)
     {
+	    //Physic Question 3
         cout << "As light from a star spreads out and weakens, do gaps form between the photons?\nYes/No" << endl;
         cin >> PhysicsQ3;
 
@@ -247,7 +252,7 @@ void KeyObtain()
         }
     }
 
-    cout << "Keys: " << key;
+    cout << "🔑 Keys: " << key;
 }
 
 
@@ -259,6 +264,7 @@ void door()
 	 //the door opens and the key dissapears
         doorR++;
         key--;
+	    //Gives one artefact part
         DoorPassCounter1++;
     }
     else if (x == doorX2 && y == doorY2 && key >= 1 && DoorPassCounter2 == 0)
@@ -266,6 +272,7 @@ void door()
         //the door opens and the key dissapears
         doorR++;
         key--;
+	    //Gives one artefact part
         DoorPassCounter2++;
     }
     else if (x == doorX3 && y == doorY3 && key >= 1 && DoorPassCounter3 == 0)
@@ -273,10 +280,12 @@ void door()
         //the door opens and the key dissapears
         doorR++;
         key--;
+	    //Gives one artefact part
         DoorPassCounter3++;
     }
     else if (doorR == 3)
     {
+	   //If all artefact parts are collected the game ends
         gOver = true;
         cout << " ";
     }
@@ -300,6 +309,7 @@ int main()
 
     while (gOver == false)
     {
+	    //Building the game
         Map();
         Input();
         KeyObtain();
