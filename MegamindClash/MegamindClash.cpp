@@ -8,29 +8,29 @@ using namespace std;
 
 bool gOver;
 int x, y, keyX, keyY, doorX, doorY;
+char temp;
 bool key = 0;
 bool doorR = 0;
-enum eDirecton { STOP = 1, LEFT, RIGHT, UP, DOWN };
-eDirecton dir;
+
 
 //map size
 char map[20][41] = {
     "----------------------------------------",
-    "|       |                      |       |",
+    "|       |D                     |       |",
     "|       |      _____           |       |",
     "|_______|      |B1 |___________|       |",
     "|              |___|___________|_______|",
     "|                                      |",
     "|                      _________       |",
     "|                      |    |D3|       |",
-    "|                           |--|       |",
+    "|                H     |    |__|  D    |",
     "|----------|           |       |       |",
     "|          |           |_______|       |",
     "|----------|                           |",
-    "|                                      |",
+    "|D                                     |",
     "|                  _____________       |",
     "|       ____       |C2   |     |       |",
-    "|       |A5|       |     |--- -|       |",
+    "|       |A5|       |     |_____|       |",
     "|       |  |       |     |             |",
     "|       |  |       |     |             |",
     "|       |  |       |     |             |",
@@ -43,23 +43,24 @@ char map[20][41] = {
 void Setup()
 {
     gOver = false;
-    dir = STOP;
-    x = (32 / 2) - 1;
-    y = 18 - 1;
-
-    keyX = 32 - 1;
-    keyY = (18 / 2) - 1;
-
-    doorX = 0;
-    doorY = 0;
 }
 
 //printing the map on screen
 void Map()
 {
-	for (int i = 0; i < 18; i++) 
+	for (int i = 0; i < 20; i++) 
     {
-		printf("%s\n", map[i]);
+        for (int j = 0; j < 41; j++)
+        {
+            if (map[i][j] == 'H')
+            {
+                x = j;
+                y = i;
+            }
+
+            cout << map[i][j];
+        }
+        cout << endl;
 	}
 }
 
@@ -73,45 +74,50 @@ void Input()
         {	
 	//movement		
         case 'a':
-            dir = LEFT;
+            if (x - 1 >= 0 && map[y][x - 1] == ' ')
+            {
+                temp = map[y][x - 1];
+                map[y][x - 1] = map[y][x];
+                map[y][x] = temp;
+                x--;
+            }
 
             break;
         case 'd':
-            dir = RIGHT;
+            if (x + 1 <= 40 && map[y][x + 1] == ' ')
+            {
+                temp = map[y][x + 1];
+                map[y][x + 1] = map[y][x];
+                map[y][x] = temp;
+                x++;
+            }
 
             break;
         case 'w':
-            dir = UP;
+            if (y - 1 >= 0 && map[y - 1][x] == ' ')
+            {
+                temp = map[y - 1][x];
+                map[y - 1][x] = map[y][x];
+                map[y][x] = temp;
+                y--;
+            }
+
 
             break;
         case 's':
-            dir = DOWN;
+            if (y + 1 <= 19 && map[y + 1][x] == ' ')
+            {
+                temp = map[y + 1][x];
+                map[y + 1][x] = map[y][x];
+                map[y][x] = temp;
+                x--;
+            }
 
             break;
         case 'x':
             gOver = true;
             break;
         }
-    }
-
-    switch (dir)
-    {
-    case LEFT:
-        x--;
-        dir = STOP;
-        break;
-    case RIGHT:
-        x++;
-        dir = STOP;
-        break;
-    case UP:
-        y--;
-        dir = STOP;
-        break;
-    case DOWN:
-        y++;
-        dir = STOP;
-        break;
     }
 }
 
@@ -161,6 +167,7 @@ int main()
 {
     Setup();
     Map();
+    
     while (gOver == false)
     {
         Input();
