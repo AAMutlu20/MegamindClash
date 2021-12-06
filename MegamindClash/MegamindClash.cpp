@@ -116,10 +116,10 @@ void Input()
     if (_kbhit()) //clicking a character on the keyboard
     {
         switch (_getch()) //obtaining the clicked character
-        {	
-	//movement		
-        case 'a':
-            if (x - 1 >= 0 && map[y][x - 1] == ' ' or map[y][x - 1] == 'K' or map[y][x - 1] == 'D')
+        {
+            //movement		
+        case 'a': //move left
+            if (x - 1 >= 0 && map[y][x - 1] == ' ')
             {
                 temp = map[y][x - 1];
                 map[y][x - 1] = map[y][x];
@@ -128,8 +128,18 @@ void Input()
             }
 
             break;
-        case 'd':
-            if (x + 1 <= 40 && map[y][x + 1] == ' ' or map[y][x + 1] == 'K' or map[y][x + 1] == 'D')
+        case 'A': //move left
+            if (x - 1 >= 0 && map[y][x - 1] == ' ')
+            {
+                temp = map[y][x - 1];
+                map[y][x - 1] = map[y][x];
+                map[y][x] = temp;
+                x--;
+            }
+
+            break;
+        case 'd': //move right
+            if (x + 1 <= 40 && map[y][x + 1] == ' ')
             {
                 temp = map[y][x + 1];
                 map[y][x + 1] = map[y][x];
@@ -138,8 +148,18 @@ void Input()
             }
 
             break;
-        case 'w':
-            if (y - 1 >= 0 && map[y - 1][x] == ' ' or map[y - 1][x] == 'K' or map[y - 1][x] == 'D')
+        case 'D': //move right
+            if (x + 1 <= 40 && map[y][x + 1] == ' ')
+            {
+                temp = map[y][x + 1];
+                map[y][x + 1] = map[y][x];
+                map[y][x] = temp;
+                x++;
+            }
+
+            break;
+        case 'w': //move up
+            if (y - 1 >= 0 && map[y - 1][x] == ' ')
             {
                 temp = map[y - 1][x];
                 map[y - 1][x] = map[y][x];
@@ -149,8 +169,19 @@ void Input()
 
 
             break;
-        case 's':
-            if (y + 1 <= 19 && map[y + 1][x] == ' ' or map[y + 1][x] == 'K' or map[y + 1][x] == 'D')
+        case 'W': //move up
+            if (y - 1 >= 0 && map[y - 1][x] == ' ')
+            {
+                temp = map[y - 1][x];
+                map[y - 1][x] = map[y][x];
+                map[y][x] = temp;
+                y--;
+            }
+
+
+            break;
+        case 's': //move down
+            if (y + 1 <= 19 && map[y + 1][x] == ' ')
             {
                 temp = map[y + 1][x];
                 map[y + 1][x] = map[y][x];
@@ -159,7 +190,16 @@ void Input()
             }
 
             break;
-        case 'x':
+        case 'S': //move down
+            if (y + 1 <= 19 && map[y + 1][x] == ' ')
+            {
+                temp = map[y + 1][x];
+                map[y + 1][x] = map[y][x];
+                map[y][x] = temp;
+            }
+
+            break;
+        case 'x': //end game character
             gOver = true;
             break;
         }
