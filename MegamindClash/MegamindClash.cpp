@@ -71,42 +71,50 @@ void Map()
                 doorX1 = j;
                 doorY1 = i;
                 counter++;
+                break;
             }
             else if (map[i][j] == 'D' && counter == 1)
             {
                 doorX2 = j;
                 doorY2 = i;
                 counter++;
+                break;
             }
             else if (map[i][j] == 'D' && counter == 2)
             {
                 doorX3 = j;
                 doorY3 = i;
                 counter++;
+                break;
             }
             else if (map[i][j] == 'K' && counter2 == 0)
             {
                 keyX1 = j;
                 keyY1 = i;
                 counter++;
+                break;
             }
             else if (map[i][j] == 'K' && counter2 == 1)
             {
                 keyX2 = j;
                 keyY2 = i;
                 counter++;
+                break;
             }
             else if (map[i][j] == 'K' && counter2 == 2)
             {
                 keyX3 = j;
                 keyY3 = i;
                 counter++;
+                break;
             }
 
             cout << map[i][j];
         }
         cout << endl;
     }
+
+    cout << "Keys: " << key;
 }
 
 
@@ -209,17 +217,17 @@ void Input()
 //getting keys
 void KeyObtain()
 {
-    if (x == keyX1 && y == keyY1)
+    if (x == keyX1 - 1 && y == keyY1)
     {
         key++;
         map[keyX1][keyY1] = ' ';
     }
-    else if (x == keyX2 && y == keyY2)
+    else if (x == keyX2 + 1 && y == keyY2)
     {
         key++;
         map[keyX2][keyY2] = ' ';
     }
-    else if (x == keyX3 && y == keyY3)
+    else if (x == keyX3 + 1 && y == keyY3)
     {
         key++;
         map[keyX3][keyY3] = ' ';
@@ -230,21 +238,21 @@ void KeyObtain()
 //opening the doors
 void door()
 {
-    if (x == doorX1 && y == doorY1 && key >= 1)
+    if (x == doorX1 + 1 && y == doorY1 && key >= 1)
     {
 	 //the door opens and the key dissapears
         doorR++;
         key--;
         map[doorX1][doorY1] = ' ';
     }
-    else if (x == doorX2 && y == doorY2 && key >= 1)
+    else if (x == doorX2 - 1 && y == doorY2 && key >= 1)
     {
         //the door opens and the key dissapears
         doorR++;
         key--;
         map[doorX2][doorY2] = ' ';
     }
-    else if (x == doorX3 && y == doorY3 && key >= 1)
+    else if (x == doorX3 + 1 && y == doorY3 && key >= 1)
     {
         //the door opens and the key dissapears
         doorR++;
