@@ -55,6 +55,7 @@ void Setup()
 //printing the map on screen
 void Map()
 {
+    system("cls");
     for (int i = 0; i < 20; i++)
     {
         for (int j = 0; j < 41; j++)
@@ -82,7 +83,6 @@ void Map()
                 doorY3 = i;
                 counter++;
             }
-
 
             cout << map[i][j];
         }
