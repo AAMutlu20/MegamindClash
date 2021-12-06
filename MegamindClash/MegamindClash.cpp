@@ -28,14 +28,14 @@ char map[20][41] = {
     "|       |      _____           |       |",
     "|       |      |B1 |___________|       |",
     "|       |      |___|___________|_______|",
-    "|       |                              |",
-    "|_______|              _________       |",
+    "|_______|                              |",
+    "|                      _________       |",
     "|                      |    |D3|       |",
     "|                H     |    |__|  D    |",
     "|__________            |       |       |",
     "|          |           |_______|       |",
-    "|__________|                           |",
-    "|D                                     |",
+    "|________  |                           |",
+    "|D      |__|                           |",
     "|                  _____________       |",
     "|       ____       |C2   |     |       |",
     "|       |A5|       |     |_____|       |",
@@ -61,42 +61,42 @@ void Map()
     {
         for (int j = 0; j < 41; j++)
         {
-            if (map[i][j] == 'H')
+            if (map[i][j] == 'H') //player
             {
                 x = j;
                 y = i;
             }
-            else if (map[i][j] == 'D' && counter == 0)
+            else if (map[i][j] == 'D' && counter == 0) //door1
             {
                 doorX1 = j;
                 doorY1 = i;
                 counter++;
             }
-            else if (map[i][j] == 'D' && counter == 1)
+            else if (map[i][j] == 'D' && counter == 1) //door2
             {
                 doorX2 = j;
                 doorY2 = i;
                 counter++;
             }
-            else if (map[i][j] == 'D' && counter == 2)
+            else if (map[i][j] == 'D' && counter == 2) //door3
             {
                 doorX3 = j;
                 doorY3 = i;
                 counter++;
             }
-            else if (map[i][j] == 'K' && counter2 == 0)
+            else if (map[i][j] == 'K' && counter2 == 0) //key1
             {
                 keyX1 = j;
                 keyY1 = i;
                 counter++;
             }
-            else if (map[i][j] == 'K' && counter2 == 1)
+            else if (map[i][j] == 'K' && counter2 == 1) //key2
             {
                 keyX2 = j;
                 keyY2 = i;
                 counter++;
             }
-            else if (map[i][j] == 'K' && counter2 == 2)
+            else if (map[i][j] == 'K' && counter2 == 2) //key3
             {
                 keyX3 = j;
                 keyY3 = i;
@@ -209,7 +209,7 @@ void Input()
 //getting keys
 void KeyObtain()
 {
-    if (x == keyX1 && y == keyY1)
+    if (x == keyX1 && y == keyY1) //player going into the key coordinates
     {
         key++;
         map[keyX1][keyY1] = ' ';
@@ -239,14 +239,14 @@ void door()
     }
     else if (x == doorX2 && y == doorY2 && key >= 1)
     {
-        //the door opens and the key dissapears
+        
         doorR++;
         key--;
         map[doorX2][doorY2] = ' ';
     }
     else if (x == doorX3 && y == doorY3 && key >= 1)
     {
-        //the door opens and the key dissapears
+        
         doorR++;
         key--;
         map[doorX3][doorY3] = ' ';
