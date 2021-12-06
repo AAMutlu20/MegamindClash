@@ -97,8 +97,8 @@ void Map()
         cout << endl;
     }
 //Artefacts and Coords menu
-    cout << "🧭Coords: " << x << "/" << y << endl;
-    cout << "🏺Artefact Parts: " << doorR << "/" << "3" << endl;
+    cout << "Coords: " << x << "/" << y << endl;
+    cout << "Artefact Parts: " << doorR << "/" << "3" << endl;
 }
 
 
@@ -210,7 +210,7 @@ void KeyObtain()
         cout << "Can a fire have a shadow?\nYes/No" << endl;
         cin >> PhysicsQ;
 
-        if (PhysicsQ == "Yes")
+        if (PhysicsQ == "Yes" || PhysicsQ == "yes")
         {
 		//If the answer is right the player obtains 1 key.
             key++;
@@ -228,7 +228,7 @@ void KeyObtain()
         cout << "Can light bend around corners?\nYes/No" << endl;
         cin >> PhysicsQ2;
 
-        if (PhysicsQ2 == "Yes")
+        if (PhysicsQ2 == "Yes" || PhysicsQ2 == "yes")
         {
             key++;
             KeyCollectionCounter2++;
@@ -244,7 +244,7 @@ void KeyObtain()
         cout << "As light from a star spreads out and weakens, do gaps form between the photons?\nYes/No" << endl;
         cin >> PhysicsQ3;
 
-        if (PhysicsQ3 == "No")
+        if (PhysicsQ3 == "No" || PhysicsQ3 == "no")
         {
             key++;
             KeyCollectionCounter3++;
@@ -255,7 +255,7 @@ void KeyObtain()
         }
     }
 
-    cout << "🔑 Keys: " << key;
+    cout << "Keys: " << key;
 }
 
 
