@@ -16,14 +16,15 @@ int keyX2, keyY2;
 int keyX3, keyY3;
 char temp;
 int counter = 0;
-bool key = 0;
-bool doorR = 0;
+int counter2 = 0;
+int key = 0;
+int doorR = 0;
 
 
 //map size
 char map[20][41] = {
     "----------------------------------------",
-    "|       |D                     |       |",
+    "|       |D                    K|       |",
     "|       |      _____           |       |",
     "|       |      |B1 |___________|       |",
     "|       |      |___|___________|_______|",
@@ -38,9 +39,9 @@ char map[20][41] = {
     "|                  _____________       |",
     "|       ____       |C2   |     |       |",
     "|       |A5|       |     |_____|       |",
+    "|       |  |       |     |K            |",
     "|       |  |       |     |             |",
-    "|       |  |       |     |             |",
-    "|       |  |       |     |             |",
+    "|       |  |K      |     |             |",
     "----------------------------------------",
     
 };
@@ -83,6 +84,24 @@ void Map()
                 doorY3 = i;
                 counter++;
             }
+            else if (map[i][j] == 'K' && counter2 == 0)
+            {
+                keyX1 = j;
+                keyY1 = i;
+                counter++;
+            }
+            else if (map[i][j] == 'K' && counter2 == 1)
+            {
+                keyX2 = j;
+                keyY2 = i;
+                counter++;
+            }
+            else if (map[i][j] == 'K' && counter2 == 2)
+            {
+                keyX3 = j;
+                keyY3 = i;
+                counter++;
+            }
 
             cout << map[i][j];
         }
@@ -100,7 +119,7 @@ void Input()
         {	
 	//movement		
         case 'a':
-            if (x - 1 >= 0 && map[y][x - 1] == ' ')
+            if (x - 1 >= 0 && map[y][x - 1] == ' ' or map[y][x - 1] == 'K' or map[y][x - 1] == 'D')
             {
                 temp = map[y][x - 1];
                 map[y][x - 1] = map[y][x];
@@ -110,7 +129,7 @@ void Input()
 
             break;
         case 'd':
-            if (x + 1 <= 40 && map[y][x + 1] == ' ')
+            if (x + 1 <= 40 && map[y][x + 1] == ' ' or map[y][x + 1] == 'K' or map[y][x + 1] == 'D')
             {
                 temp = map[y][x + 1];
                 map[y][x + 1] = map[y][x];
@@ -120,7 +139,7 @@ void Input()
 
             break;
         case 'w':
-            if (y - 1 >= 0 && map[y - 1][x] == ' ')
+            if (y - 1 >= 0 && map[y - 1][x] == ' ' or map[y - 1][x] == 'K' or map[y - 1][x] == 'D')
             {
                 temp = map[y - 1][x];
                 map[y - 1][x] = map[y][x];
@@ -131,7 +150,7 @@ void Input()
 
             break;
         case 's':
-            if (y + 1 <= 19 && map[y + 1][x] == ' ')
+            if (y + 1 <= 19 && map[y + 1][x] == ' ' or map[y + 1][x] == 'K' or map[y + 1][x] == 'D')
             {
                 temp = map[y + 1][x];
                 map[y + 1][x] = map[y][x];
@@ -152,11 +171,18 @@ void KeyObtain()
 {
     if (x == keyX1 && y == keyY1)
     {
-        key = 1;
+        key++;
+        map[keyX1][keyY1] = ' ';
     }
-    if (key == 1)
+    else if (x == keyX2 && y == keyY2)
     {
-        cout << "You found a Key!";
+        key++;
+        map[keyX2][keyY2] = ' ';
+    }
+    else if (x == keyX3 && y == keyY3)
+    {
+        key++;
+        map[keyX3][keyY3] = ' ';
     }
 }
 
@@ -164,13 +190,28 @@ void KeyObtain()
 //opening the doors
 void door()
 {
-    if (x == doorX1 && y == doorY1 && key == 1)
+    if (x == doorX1 && y == doorY1 && key >= 1)
     {
 	 //the door opens and the key dissapears
-        doorR = 1;
-        key = 0;
+        doorR++;
+        key--;
+        map[doorX1][doorY1] = ' ';
     }
-    if (doorR == 1)
+    else if (x == doorX2 && y == doorY2 && key >= 1)
+    {
+        //the door opens and the key dissapears
+        doorR++;
+        key--;
+        map[doorX2][doorY2] = ' ';
+    }
+    else if (x == doorX3 && y == doorY3 && key >= 1)
+    {
+        //the door opens and the key dissapears
+        doorR++;
+        key--;
+        map[doorX3][doorY3] = ' ';
+    }
+    else if (doorR == 3)
     {
         gOver = true;
         cout << " ";
